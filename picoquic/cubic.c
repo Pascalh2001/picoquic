@@ -366,7 +366,7 @@ void picoquic_cubic_delete(picoquic_path_t* path_x)
     }
 }
 
-/* Definition record for the New Reno algorithm */
+/* Definition record for the cubic algorithm */
 #define PICOQUIC_CUBIC_ID 0x0f0f0f0f /* NR88 */
 
 picoquic_congestion_algorithm_t picoquic_cubic_algorithm_struct = {
