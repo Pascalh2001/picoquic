@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+override_dh_install:
+	dh_install
+
+	mkdir -p ${CURDIR}/debian/collect-agent/usr/lib/python3/dist-packages/
+	install -m 0755 ../collect_agent.py ${CURDIR}/debian/collect-agent/usr/lib/python3/dist-packages/collect_agent.py
+
+%:
+	dh $@ 

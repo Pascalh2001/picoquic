@@ -1,0 +1,23 @@
+collect-agent (1.0.3) xenial; urgency=low
+
+  * Fix bug with openlog
+
+ -- OpenBACH maintainers <admin@openbach.org>  Mon, 18 Dec 2017 14:03:11 +0100
+
+collect-agent (1.0.2) xenial; urgency=low
+
+  * Added python 2.7 compatibility
+
+ -- OpenBACH maintainers <admin@openbach.org>  Fri, 13 Dec 2017 15:03:11 +0100
+
+collect-agent (1.0.1) xenial; urgency=low
+
+  * Fix the name of the logs opened by register_collect
+
+ -- OpenBACH maintainers <admin@openbach.org>  Fri, 8 Dec 2017 16:06:23 +0100
+
+collect-agent (1.0) xenial; urgency=low
+
+  * Initial release
+
+ -- OpenBACH maintainers <admin@openbach.org>  Thu, 16 Nov 2017 16:41:39 +0100
