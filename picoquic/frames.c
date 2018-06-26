@@ -53,8 +53,22 @@ picoquic_stream_head* picoquic_create_stream(picoquic_cnx_t* cnx, uint64_t strea
             previous_stream->next_stream = stream;
         }
     }
-
+    update_stream_count_for_paths(cnx);
     return stream;
+}
+
+void update_stream_count_for_paths(picoquic_cnx_t* cnx)
+{
+    /* Count the number of streams */
+    //We start with 1 for stream 0 which is not part of the cnx->first_stream chained list.
+    uint16_t stream_count = 1;
+    picoquic_stream_head* next = &(cnx->first_stream);
+    while(next)
+    {
+        stream_count++;
+        next = next->next_stream;
+    }
+    cnx->total_stream_count = stream_count;
 }
 
 /* if the initial remote has changed, update the existing streams 

@@ -350,7 +350,20 @@ typedef struct st_picoquic_path_t {
     uint64_t pacing_margin_micros;
     uint64_t next_pacing_time;
 
+    /* Connexion total stream count */
+    uint16_t* total_stream_count;
+
 } picoquic_path_t;
+
+/**
+ * @brief Updates the stream count within each path of the connexion.
+ * This allows each congestion controller for each path to be aware of the total
+ * count of streams.
+ * 
+ * @param[in,out] cnx An initialized connexion struct.
+ */
+void update_stream_count_for_paths(picoquic_cnx_t* cnx);
+
 
 /* 
  * Per connection context.
@@ -474,6 +487,7 @@ typedef struct st_picoquic_cnx_t {
 
     /* Management of streams */
     picoquic_stream_head first_stream;
+    uint16_t total_stream_count; //Total stream count including stream 0. Used for congestion controller.
 
     /* If not `0`, the connection will send keep alive messages in the given interval. */
     uint64_t keep_alive_interval;
