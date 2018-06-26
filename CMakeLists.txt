@@ -4,6 +4,7 @@ CMAKE_POLICY(SET CMP0003 NEW)
 PROJECT(picoquic)
 
 SET(CMAKE_C_STANDARD 11)
+SET(MATH_LINK_FLAG "-lm")
 
 # FIND_PACKAGE(PkgConfig REQUIRED)
 
@@ -23,6 +24,7 @@ SET(PICOQUIC_LIBRARY_FILES
     picoquic/intformat.c
     picoquic/logger.c
     picoquic/newreno.c
+    picoquic/cubic.c
     picoquic/packet.c
     picoquic/picohash.c
     picoquic/picosocks.c
@@ -86,6 +88,7 @@ TARGET_LINK_LIBRARIES(picoquicdemo picoquic-core
     ${PTLS_OPENSSL}    
     ${PTLS_MINICRYPTO}
     ${OPENSSL_LIBRARIES}
+    ${MATH_LINK_FLAG}
     ${CMAKE_DL_LIBS}
 )
 
@@ -98,6 +101,7 @@ TARGET_LINK_LIBRARIES(picoquic_ct picoquic-core
     ${PTLS_OPENSSL}
     ${PTLS_CORE}
     ${OPENSSL_LIBRARIES}
+    ${MATH_LINK_FLAG}
     ${CMAKE_DL_LIBS}
 )
 
