@@ -98,6 +98,7 @@ void picoquic_cubic_init(picoquic_path_t* path_x)
     {
         fprintf(stderr, "[ERR] Unable to connect to deamon\n");
     }
+    collect_agent_send_log(1,"Congestion controller started\n");
     kCubeFactor = (UINT64_C(1) << kCubeScale) / kCubeCongestionWindowScale / DEFAULT_TCP_MSS;
     picoquic_cubic_state_t* cu_state = (picoquic_cubic_state_t*)malloc(sizeof(picoquic_cubic_state_t));
     path_x->congestion_alg_state = (void*)cu_state;

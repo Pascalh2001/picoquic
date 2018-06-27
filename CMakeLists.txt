@@ -5,6 +5,7 @@ PROJECT(picoquic)
 
 SET(CMAKE_C_STANDARD 11)
 SET(MATH_LINK_FLAG "-lm")
+SET(OPENBACH_LIB "/usr/lib/libcollectagent.so")
 
 # FIND_PACKAGE(PkgConfig REQUIRED)
 
@@ -88,6 +89,7 @@ TARGET_LINK_LIBRARIES(picoquicdemo picoquic-core
     ${PTLS_OPENSSL}    
     ${PTLS_MINICRYPTO}
     ${OPENSSL_LIBRARIES}
+    ${OPENBACH_LIB}
     ${MATH_LINK_FLAG}
     ${CMAKE_DL_LIBS}
 )
@@ -101,6 +103,7 @@ TARGET_LINK_LIBRARIES(picoquic_ct picoquic-core
     ${PTLS_OPENSSL}
     ${PTLS_CORE}
     ${OPENSSL_LIBRARIES}
+    ${OPENBACH_LIB}
     ${MATH_LINK_FLAG}
     ${CMAKE_DL_LIBS}
 )

@@ -1,0 +1,33 @@
+general:
+  name: picoquicdemo
+  description:>
+    This is picoquic demo.
+  job_version: '1.0'
+  keywords: [quic, server]
+  persistent: false
+
+platform_configuration:
+  - ansible_system: 'Linux'
+    ansible_distribution: 'Ubuntu'
+    ansible_distribution_version: '16.04'
+    command: './picoquicdemo'
+    command_stop:
+
+arguments:
+  optionnal:
+    - name: target_server_address
+      type: string
+      count: 1
+      description:>
+        The address of the server to connect to.
+    - name: target_server_port
+      type: int
+      count: 1
+      description:>
+        The port of the server to connect to.
+    - name : server_port
+      type: int
+      count: 1
+      flag: '-p'
+      description:>
+        The port of the server (when used, picoquid starts in server mode)

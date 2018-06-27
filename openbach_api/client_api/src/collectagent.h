@@ -133,16 +133,19 @@ namespace collect_agent {
  */
 extern "C" {
 
+#endif /*__cplusplus*/ 
+
+#ifdef __cplusplus
   DLL_PUBLIC unsigned int collect_agent_register_collect(
     char* config_file,
     int log_option=LOG_PID,
     int log_facility=LOG_USER,
     bool _new=false);
-#else /* __cplusplus */  
+#else /* __cplusplus*/
   DLL_PUBLIC unsigned int collect_agent_register_collect(
     char* config_file,
     ...);
-#endif /* __cplusplus*/
+#endif /* __cplusplus*/ 
   DLL_PUBLIC void collect_agent_send_log(
     int priority,
     const char* log,
@@ -151,6 +154,7 @@ extern "C" {
     long long timestamp,
     char* suffix,
     char* stats);
+
   DLL_PUBLIC char* collect_agent_reload_stat();
   DLL_PUBLIC char* collect_agent_remove_stat();
   DLL_PUBLIC char* collect_agent_reload_all_stats();
@@ -160,4 +164,5 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
 #endif /* _COLLECT_AGENT_API_H__ */
