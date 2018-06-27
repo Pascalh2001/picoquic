@@ -38,6 +38,8 @@
  */
 #include "picoquic_internal.h"
 
+#include <collectagent.h>
+
 #include <stdlib.h>
 #include <math.h>
 
@@ -91,7 +93,11 @@ typedef struct st_picoquic_cubic_state_t {
  */
 void picoquic_cubic_init(picoquic_path_t* path_x)
 {
-    fprintf(stderr, "-\nThis is cubic CC\n-\n");
+    fprintf(stderr, "-\nThis is cubic congestion controller\n-\n");
+    if(!collect_agent_register_collect("picoquic_cubic_collectagent.conf"))
+    {
+        fprintf(stderr, "[ERR] Unable to connect to deamon\n");
+    }
     kCubeFactor = (UINT64_C(1) << kCubeScale) / kCubeCongestionWindowScale / DEFAULT_TCP_MSS;
     picoquic_cubic_state_t* cu_state = (picoquic_cubic_state_t*)malloc(sizeof(picoquic_cubic_state_t));
     path_x->congestion_alg_state = (void*)cu_state;

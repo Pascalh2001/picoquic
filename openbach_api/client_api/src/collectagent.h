@@ -41,11 +41,18 @@
 #ifndef _COLLECT_AGENT_API_H__
 #define _COLLECT_AGENT_API_H__
 
+#ifdef __cplusplus
+
 #include <string>
 #include <unordered_map>
 
+#else /*__cplusplus */
+#include <stdbool.h>
+#endif /* __cplusplus */
+
 #include "syslog.h"
 
+#ifdef __cplusplus
 
 extern unsigned int rstats_connection_id;
 extern unsigned int job_instance_id;
@@ -124,24 +131,33 @@ namespace collect_agent {
  *
  * Used by Python ctypes module for bindings.
  */
-extern "C" DLL_PUBLIC unsigned int collect_agent_register_collect(
-  char* config_file,
-  int log_option=LOG_PID,
-  int log_facility=LOG_USER,
-  bool _new=false);
-extern "C" DLL_PUBLIC void collect_agent_send_log(
-  int priority,
-  const char* log,
-  ...);
-extern "C" DLL_PUBLIC char* collect_agent_send_stat(
-  long long timestamp,
-  char* suffix,
-  char* stats);
-extern "C" DLL_PUBLIC char* collect_agent_reload_stat();
-extern "C" DLL_PUBLIC char* collect_agent_remove_stat();
-extern "C" DLL_PUBLIC char* collect_agent_reload_all_stats();
-extern "C" DLL_PUBLIC char* collect_agent_change_config(
-  bool storage,
-  bool broadcast);
+extern "C" {
 
+  DLL_PUBLIC unsigned int collect_agent_register_collect(
+    char* config_file,
+    int log_option=LOG_PID,
+    int log_facility=LOG_USER,
+    bool _new=false);
+#else /* __cplusplus */  
+  DLL_PUBLIC unsigned int collect_agent_register_collect(
+    char* config_file,
+    ...);
+#endif /* __cplusplus*/
+  DLL_PUBLIC void collect_agent_send_log(
+    int priority,
+    const char* log,
+    ...);
+  DLL_PUBLIC char* collect_agent_send_stat(
+    long long timestamp,
+    char* suffix,
+    char* stats);
+  DLL_PUBLIC char* collect_agent_reload_stat();
+  DLL_PUBLIC char* collect_agent_remove_stat();
+  DLL_PUBLIC char* collect_agent_reload_all_stats();
+  DLL_PUBLIC char* collect_agent_change_config(
+    bool storage,
+    bool broadcast);
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 #endif /* _COLLECT_AGENT_API_H__ */
